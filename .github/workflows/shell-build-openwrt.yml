@@ -22,7 +22,7 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt.git
   REPO_BRANCH: v22.03.3
-  CONFIG_FILE: origin.config
+  CONFIG_FILE: config/origin.config
   DIY_P1_SH: script/diy-part1.sh
   DIY_P2_SH: script/diy-part2.sh
   UPLOAD_BIN_DIR: false
