@@ -12,6 +12,7 @@
 
 + [sundaqiang/openwrt-packages (github.com)](https://github.com/sundaqiang/openwrt-packages)
 + [sgpublic/openwrt-packages (github.com)](https://github.com/sgpublic/openwrt-packages)
++ [package/openclash (github.com)](https://github.com/vernesong/OpenClash)
 
 ## 主题
 
@@ -21,10 +22,8 @@
 
 ## 插件
 
-+ luci-app-ssr-plus
 + luci-app-wolplus
 + luci-app-openclash
-+ luci-app-openvpn
 
 ## 管理页
 

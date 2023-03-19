@@ -26,8 +26,8 @@ git_clone() {
   fi
 }
 
-# 添加软件源 fw876/helloworld
-git_clone https://github.com/fw876/helloworld.git package/helloworld
+## 添加软件源 fw876/helloworld
+#git_clone https://github.com/fw876/helloworld.git package/helloworld
 # 添加软件源 sundaqiang/openwrt-packages
 git_clone https://github.com/sundaqiang/openwrt-packages.git package/sundaqiang
 # 添加软件源 vernesong/OpenClash
