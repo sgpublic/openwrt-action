@@ -6,6 +6,7 @@ REPO_BRANCH='v22.03.5'
 GITHUB_REPOSITORY='SGPublic/openwrt-lede'
 GITHUB_ACTOR='SGPublic'
 CONFIG_FILE="$WORK_ROOT/config/origin.config"
+PATCHES_FILE="$WORK_ROOT/patches"
 DIY_P1_SH="$WORK_ROOT/script/diy-part1.sh"
 DIY_P2_SH="$WORK_ROOT/script/diy-part2.sh"
 THREAD=28
@@ -18,6 +19,7 @@ declare -a _STEP_STACK=(
   Install_Feeds
   Load_Custom_Configuration
   Download_Package
+  COPY_PATCHES_FILE
   Compile_The_Firmware
   Organize_Files
   Upload_Firmware_To_Release
@@ -143,6 +145,10 @@ Download_Package() {
   find /tmp/openwrt/download -size -1024c -exec ls -l {} \;
   runing "find /tmp/openwrt/download -size -1024c -exec rm -f {} \;"
   find /tmp/openwrt/download -size -1024c -exec rm -f {} \;
+}
+
+COPY_PATCHES_FILE() {
+  cp -r $PATCHES_FILE ./
 }
 
 Compile_The_Firmware() {
