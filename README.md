@@ -6,7 +6,7 @@
 
 ## 适用于
 
-+ r2s
++ x86_64 on i225-V
 
 ## 插件源
 
@@ -31,8 +31,3 @@
 
 默认密码：`password`
 
-## 下载
-
-每周六凌晨 3 点触发云编译
-
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/SGPublic/k2p-lede?style=for-the-badge&label=Download)](https://github.com/SGPublic/k2p-lede/releases/latest)
