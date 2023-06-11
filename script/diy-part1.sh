@@ -51,15 +51,14 @@ git_clone https://github.com/jerrykuku/luci-app-argon-config.git package/jerryku
 svn export --force https://github.com/immortalwrt/immortalwrt/trunk/package/kernel/r8152 ./package/kernel/r8152-new
 
 # 修改标准目录
+mkdir -p /tmp/openwrt
+
 sed -i 's/$(TOPDIR)\/staging_dir/\/tmp\/openwrt\/staging_dir/g' rules.mk
-mkdir -p /tmp/openwrt/staging_dir
 ln -sf /tmp/openwrt/staging_dir staging_dir
 
 sed -i 's/$(TOPDIR)\/build_dir/\/tmp\/openwrt\/build_dir/g' rules.mk
-mkdir -p /tmp/openwrt/build_dir
 ln -sf /tmp/openwrt/build_dir build_dir
 
-mkdir -p /tmp/openwrt/binary
 ln -sf /tmp/openwrt/binary bin
 
 mkdir -p /tmp/openwrt/download
