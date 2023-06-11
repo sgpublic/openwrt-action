@@ -21,5 +21,5 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-n
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-ssl-nginx/Makefile
 
 # 删除 uhttpd
-sed -i 's/+uhttpd //g' feeds/luci/collections/luci/Makefile
-sed -i 's/+uhttpd-mod-ubus //g' feeds/luci/collections/luci/Makefile
+sed -i 's/+uhttpd-mod-ubus//g' feeds/luci/collections/luci/Makefile
+sed -i 's/+uhttpd//g' feeds/luci/collections/luci/Makefile
