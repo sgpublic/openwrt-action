@@ -147,9 +147,28 @@ Download_Package() {
   find /tmp/openwrt/download -size -1024c -exec rm -f {} \;
 }
 
+# by ChatGPT
+recursive_copy() {
+    local source="$1"  # 源路径
+    local destination="$2"  # 目标路径
+
+    if [ -f "$source" ]; then  # 如果是文件
+        cp "$source" "$destination"  # 复制文件到目标路径
+    elif [ -d "$source" ]; then  # 如果是文件夹
+        mkdir -p "$destination"  # 创建目标文件夹（如果不存在）
+        for item in "$source"/*; do  # 遍历源文件夹中的每个项
+            if [ -e "$item" ]; then  # 检查项是否存在
+                local item_name=$(basename "$item")  # 获取项的基本名称
+                local item_destination="$destination/$item_name"  # 构建项的目标路径
+                recursive_copy "$item" "$item_destination"  # 递归复制项到目标路径
+            fi
+        done
+    fi
+}
+
 Copy_Patch_Files() {
   print_step 'Copy patch files'
-  execute "cp -r $PATCH_FILES/* ./"
+  execute "recursive_copy $PATCH_FILES/ ./"
 }
 
 Compile_The_Firmware() {
