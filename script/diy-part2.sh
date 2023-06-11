@@ -23,7 +23,3 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-s
 # 删除 uhttpd
 sed -i 's/+uhttpd //g' feeds/luci/collections/luci/Makefile
 sed -i 's/+uhttpd-mod-ubus //g' feeds/luci/collections/luci/Makefile
-
-# 交换 LAN/WAN 口（r2s 限定）
-sed -i 's,"eth1" "eth0","eth0" "eth1",g' target/linux/rockchip/armv8/base-files/etc/board.d/02_network
-sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/etc/board.d/02_network
