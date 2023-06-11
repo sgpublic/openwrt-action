@@ -24,10 +24,21 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-s
 sed -i 's/+uhttpd-mod-ubus//g' feeds/luci/collections/luci/Makefile
 sed -i 's/+uhttpd//g' feeds/luci/collections/luci/Makefile
 
-# 交换 LAN/WAN 口（r2s 限定）
+# [CTCGFW]immortalwrt
+# Use it under GPLv3, please.
+# --------------------------------------------------------
+# Remove upx commands
+makefile_file="$({ find package | grep Makefile | sed "/Makefile./d"; } 2>"/dev/null")"
+for a in ${makefile_file}; do
+  [ -n "$(grep "upx" "$a")" ] && sed -i "/upx/d" "$a"
+done
+
+#      r2s 限定      #
+# 交换 LAN/WAN 口
 sed -i 's,"eth1" "eth0","eth0" "eth1",g' target/linux/rockchip/armv8/base-files/etc/board.d/02_network
 sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/etc/board.d/02_network
-
-# 添加 INNO_USB3（限定）
+# 添加 INNO_USB3
 sed -i '/CONFIG_PHY_ROCKCHIP_INNO_USB3/d' target/linux/rockchip/armv8/config-*
 echo 'CONFIG_PHY_ROCKCHIP_INNO_USB3=y' >> target/linux/rockchip/armv8/config-*
+# 新 r8152 驱动
+svn export --force https://github.com/immortalwrt/immortalwrt/trunk/package/kernel/r8152 ./package/kernel/r8152-new
