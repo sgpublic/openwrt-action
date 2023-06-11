@@ -2,14 +2,12 @@
 set -e
 
 REPO_URL='https://github.com/openwrt/openwrt.git'
-REPO_BRANCH='v22.03.5'
-GITHUB_REPOSITORY='SGPublic/openwrt-lede'
-GITHUB_ACTOR='SGPublic'
+REPO_BRANCH='v23.05.0-rc1'
 CONFIG_FILE="$WORK_ROOT/config/origin.config"
 PATCH_FILES="$WORK_ROOT/patches"
 DIY_P1_SH="$WORK_ROOT/script/diy-part1.sh"
 DIY_P2_SH="$WORK_ROOT/script/diy-part2.sh"
-THREAD=28
+THREAD=$(nproc)
 OUTPUT_DIR="$WORK_ROOT/local"
 
 declare -a _STEP_STACK=(
