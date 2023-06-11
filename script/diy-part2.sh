@@ -27,3 +27,7 @@ sed -i 's/+uhttpd//g' feeds/luci/collections/luci/Makefile
 # 交换 LAN/WAN 口（r2s 限定）
 sed -i 's,"eth1" "eth0","eth0" "eth1",g' target/linux/rockchip/armv8/base-files/etc/board.d/02_network
 sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/etc/board.d/02_network
+
+# 添加 INNO_USB3（限定）
+sed -i '/CONFIG_PHY_ROCKCHIP_INNO_USB3/d' target/linux/rockchip/armv8/config-*
+sed -i '/CONFIG_PHY_ROCKCHIP_INNO_USB3=y/d' target/linux/rockchip/armv8/config-*
