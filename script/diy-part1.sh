@@ -47,6 +47,9 @@ git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/lu
 # 拉取插件 luci-app-argon-config
 git_clone https://github.com/jerrykuku/luci-app-argon-config.git package/jerrykuku/luci-app-argon-config
 
+# 拉取新 r8152 驱动
+svn export --force https://github.com/immortalwrt/immortalwrt/trunk/package/kernel/r8152 ./package/kernel/r8152-new
+
 # 修改标准目录
 sed -i 's/$(TOPDIR)\/staging_dir/\/tmp\/openwrt\/staging_dir/g' rules.mk
 mkdir -p /tmp/openwrt/staging_dir

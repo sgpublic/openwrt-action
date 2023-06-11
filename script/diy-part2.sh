@@ -40,5 +40,3 @@ sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/
 # 添加 INNO_USB3
 sed -i '/CONFIG_PHY_ROCKCHIP_INNO_USB3/d' target/linux/rockchip/armv8/config-*
 echo 'CONFIG_PHY_ROCKCHIP_INNO_USB3=y' >> target/linux/rockchip/armv8/config-*
-# 新 r8152 驱动
-svn export --force https://github.com/immortalwrt/immortalwrt/trunk/package/kernel/r8152 ./package/kernel/r8152-new
