@@ -2,7 +2,7 @@
 set -e
 
 REPO_URL='https://github.com/openwrt/openwrt.git'
-REPO_BRANCH='v23.05.0-rc1'
+REPO_BRANCH='v22.03.5'
 CONFIG_FILE="$WORK_ROOT/config/origin.config"
 PATCH_FILES="$WORK_ROOT/patches"
 DIY_P1_SH="$WORK_ROOT/script/diy-part1.sh"
@@ -95,6 +95,7 @@ Clone_Source_Code() {
     fi
   else
     execute "cd openwrt.bak"
+    execute "git reset --hard HEAD"
     execute "git pull origin $REPO_BRANCH"
   fi
   execute "rm -rf $_tmp_sdk"

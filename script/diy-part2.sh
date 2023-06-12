@@ -38,5 +38,5 @@ done
 sed -i 's,"eth1" "eth0","eth0" "eth1",g' target/linux/rockchip/armv8/base-files/etc/board.d/02_network
 sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/etc/board.d/02_network
 # 添加 INNO_USB3
-sed -i '/CONFIG_PHY_ROCKCHIP_INNO_USB3/d' target/linux/rockchip/armv8/config-*
-echo 'CONFIG_PHY_ROCKCHIP_INNO_USB3=y' >> target/linux/rockchip/armv8/config-*
+# sed -i '/CONFIG_PHY_ROCKCHIP_INNO_USB3/d' target/linux/rockchip/armv8/config-*
+# echo 'CONFIG_PHY_ROCKCHIP_INNO_USB3=y' >> target/linux/rockchip/armv8/config-*
