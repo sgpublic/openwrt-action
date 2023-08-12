@@ -149,7 +149,7 @@ Download_Package() {
 
 Copy_Patch_Files() {
   print_step 'Copy patch files'
-  execute "cp -r $PATCH_FILES/* ./"
+  execute "[[ -e $PATCH_FILES/* ]] && cp -r $PATCH_FILES/* ./"
 }
 
 Compile_The_Firmware() {
