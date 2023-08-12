@@ -24,6 +24,7 @@
 
 + luci-app-wolplus
 + luci-app-openclash
++ luci-app-mosdns
 
 ## 管理页
 
