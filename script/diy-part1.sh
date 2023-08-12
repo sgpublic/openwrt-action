@@ -51,8 +51,8 @@ git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/lu
 # 拉取插件 luci-app-argon-config
 git_clone https://github.com/jerrykuku/luci-app-argon-config.git package/jerrykuku/luci-app-argon-config
 # 拉取插件 luci-app-mosdns 和其依赖
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
-git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
+git_clone https://github.com/sbwml/luci-app-mosdns package/mosdns
+git_clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 
 # 修改标准目录
 sed -i 's/$(TOPDIR)\/staging_dir/\/tmp\/openwrt\/staging_dir/g' rules.mk
