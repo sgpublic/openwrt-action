@@ -2,7 +2,7 @@
 set -e
 
 REPO_URL='https://github.com/openwrt/openwrt.git'
-REPO_BRANCH='v22.03.5'
+REPO_BRANCH='v23.05.0-rc2'
 GITHUB_REPOSITORY='SGPublic/openwrt-lede'
 GITHUB_ACTOR='SGPublic'
 CONFIG_FILE="$WORK_ROOT/config/origin.config"
