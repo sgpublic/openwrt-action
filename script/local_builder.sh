@@ -149,7 +149,11 @@ Download_Package() {
 
 Copy_Patch_Files() {
   print_step 'Copy patch files'
-  execute "[[ -e $PATCH_FILES/* ]] && cp -r $PATCH_FILES/* ./"
+  if [[ -e "$PATCH_FILES/*" ]]; then
+    execute "cp -r $PATCH_FILES/* ./"
+  else
+    echo "No patch files, skip."
+  fi
 }
 
 Compile_The_Firmware() {
