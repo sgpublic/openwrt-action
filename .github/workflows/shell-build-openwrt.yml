@@ -92,6 +92,7 @@ jobs:
     - name: Copy patch files
       id: patches
       run: |
+        shopt -s nullglob
         files=(patches/*)
         [ ${#files[@]} -gt 0 ] && cp -r "patches/*" /work/openwrt/
 
