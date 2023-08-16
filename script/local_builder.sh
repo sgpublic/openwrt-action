@@ -1,16 +1,19 @@
 #!/bin/bash
 set -e
 
-REPO_URL='https://github.com/openwrt/openwrt.git'
-REPO_BRANCH='v23.05.0-rc2'
-GITHUB_REPOSITORY='SGPublic/openwrt-lede'
-GITHUB_ACTOR='SGPublic'
+##    自定义配置    ##
 CONFIG_FILE="$WORK_ROOT/config/origin.config"
 PATCH_FILES="$WORK_ROOT/patches"
 DIY_P1_SH="$WORK_ROOT/script/diy-part1.sh"
 DIY_P2_SH="$WORK_ROOT/script/diy-part2.sh"
-THREAD=28
+THREAD=$(nproc)
 OUTPUT_DIR="$WORK_ROOT/local"
+##    自定义配置    ##
+
+
+
+
+
 
 declare -a _STEP_STACK=(
   Clone_Source_Code
@@ -83,7 +86,7 @@ print_step() {
 Clone_Source_Code() {
   print_step 'Clone source code'
   execute "rm -rf openwrt"
-
+  . $WORK_ROOT/openwrt-detail.sh
   if [ ! -d 'openwrt.bak' ]; then
     execute "git clone -b $REPO_BRANCH $REPO_URL openwrt.bak"
     execute "cd openwrt.bak"
@@ -99,7 +102,6 @@ Clone_Source_Code() {
     execute "cd openwrt.bak"
     execute "git pull origin $REPO_BRANCH"
   fi
-  execute "rm -rf $_tmp_sdk"
 }
 
 Load_Custom_Feeds() {
@@ -158,6 +160,7 @@ Copy_Patch_Files() {
 
 Compile_The_Firmware() {
   print_step 'Compile the firmware'
+  execute "rm -rf /tmp/openwrt/binary/targets"
   runing "make -j$THREAD || make V=s"
   make -j$THREAD || make V=s
 }

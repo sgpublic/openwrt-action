@@ -15,6 +15,9 @@ if [ "$1" == "--local" ]; then
   set -v
 fi
 
+
+##    添加你的自定义逻辑    ##
+
 # 修改默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-nginx/Makefile
