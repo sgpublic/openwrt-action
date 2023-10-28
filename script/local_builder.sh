@@ -88,7 +88,7 @@ Clone_Source_Code() {
   execute "rm -rf openwrt"
   . $WORK_ROOT/openwrt-detail.sh
   if [ ! -d 'openwrt.bak' ]; then
-    execute "git clone -b $REPO_BRANCH $REPO_URL openwrt.bak"
+    execute "git clone -b $REPO_BRANCH $REPO_URL openwrt.bak --depth=1"
     execute "cd openwrt.bak"
     execute "mkdir -p /tmp/openwrt/staging_dir"
     if [ ! -d "staging_dir" ]; then
