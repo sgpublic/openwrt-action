@@ -50,6 +50,8 @@ mkdir -p /tmp/openwrt/log
 git_clone https://github.com/sundaqiang/openwrt-packages.git package/sundaqiang
 # 添加软件源 vernesong/OpenClash
 git_clone https://github.com/vernesong/OpenClash package/openclash
+# 添加软件源 kuoruan/openwrt-frp
+git_clone https://github.com/kuoruan/openwrt-frp.git package/frp
 
 if [ "$1" == "--local" ]; then
   # 本地拉取依赖
