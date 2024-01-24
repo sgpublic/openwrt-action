@@ -25,6 +25,9 @@
 + luci-app-wolplus
 + luci-app-openclash
 + luci-app-mosdns
++ frp-client
++ git-http
++ nginx
 
 ## 管理页
 
