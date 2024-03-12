@@ -6,7 +6,7 @@
 
 ## 适用于
 
-+ x86_64 on i225-V
++ Friendly R5s
 
 ## 插件源
 
@@ -24,8 +24,6 @@
 
 + luci-app-wolplus
 + luci-app-openclash
-+ luci-app-mosdns
-+ frp-client
 + git-http
 + nginx
 
