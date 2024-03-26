@@ -71,3 +71,7 @@ git_clone https://github.com/jerrykuku/luci-app-argon-config.git package/jerryku
 # 拉取插件 luci-app-mosdns 和其依赖
 git_clone https://github.com/sbwml/luci-app-mosdns package/mosdns
 git_clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
+## 拉取插件 luci-app-frpc 和其依赖
+#git_clone https://github.com/kuoruan/openwrt-frp package/kuoruan/openwrt-frp
+#git_clone https://github.com/kuoruan/luci-app-frpc package/kuoruan/luci-app-frpc
+
