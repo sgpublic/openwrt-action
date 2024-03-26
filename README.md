@@ -6,7 +6,7 @@
 
 ## 适用于
 
-+ Friendly R5s
++ x86_64 on i225-V
 
 ## 插件源
 
@@ -26,6 +26,7 @@
 + luci-app-openclash
 + git-http
 + nginx
++ frpc
 
 ## 管理页
 
