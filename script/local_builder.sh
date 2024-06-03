@@ -121,9 +121,17 @@ Install_Feeds() {
   execute "./scripts/feeds install -a"
 }
 
+replace_environment_value() {
+  while IFS= read -r line; do
+      echo "$line" | envsubst
+  done
+}
+
 Load_Custom_Configuration() {
   print_step 'Load custom configuration'
-  execute "cp $CONFIG_FILE ./.config"
+  # 填充 config 中使用的环境变量
+  replace_environment_value < "$CONFIG_FILE" > "$CONFIG_FILE.replaced"
+  execute "cp $CONFIG_FILE.replaced ./.config"
   execute "bash $DIY_P2_SH --local"
 }
 
