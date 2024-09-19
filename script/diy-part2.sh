@@ -26,3 +26,11 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-n
 # 删除 uhttpd
 sed -i 's/+uhttpd-mod-ubus//g' feeds/luci/collections/luci/Makefile
 sed -i 's/+uhttpd//g' feeds/luci/collections/luci/Makefile
+
+# 更新 GoLang
+rm -r feeds/packages/lang/golang
+if [ -d "/mnt/core/home/Document/OpenWrt/packages/lang/golang" ]; then
+  cp -a /mnt/core/home/Document/OpenWrt/packages/lang/golang feeds/packages/lang
+else
+  svn export https://github.com/openwrt/packages/trunk/lang/golang feeds/packages/lang/golang
+fi
