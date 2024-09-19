@@ -46,7 +46,7 @@ main() {
   read _need
 
   if [[ "$_need" =~ ^[yY]$ ]]; then
-    execute "sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc"
+    execute "sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc"
     execute "sudo apt update -y"
     execute "sudo apt install build-essential clang flex bison g++ gawk qemu-utils gcc-multilib g++-multilib gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget -y"
     execute "sudo apt clean"

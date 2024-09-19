@@ -24,6 +24,9 @@
 
 + luci-app-wolplus
 + luci-app-openclash
++ luci-app-ntf-qos
++ luci-app-openvpn
++ luci-app-mosdns
 + git-http
 + nginx
 + frpc

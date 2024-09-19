@@ -21,7 +21,11 @@ git_clone() {
     cd $path
   else
     mkdir -p "$2"
-    git clone $1 --depth=1 $2
+    branch=
+    if [ ! -z "$3" ]; then
+      $branch="-b=$3"
+    fi
+    git clone $1 --depth=1 $branch $2
   fi
 }
 
@@ -54,7 +58,7 @@ git_clone https://github.com/vernesong/OpenClash package/openclash
 if [ "$1" == "--local" ]; then
   # 本地拉取依赖
   rm -rf package/sgpublic && mkdir -p package/sgpublic
-  cp -r /mnt/core/home/Documents/OpenWrt/openwrt-packages/* package/sgpublic
+  cp -r /mnt/core/home/Document/OpenWrt/openwrt-packages/* package/sgpublic
   # rm -rf package/little-paimon && mkdir -p package/little-paimon
   # cp -r /mnt/e/Documents/OpenWrt/packages-little-paimon/* package/little-paimon
 else
@@ -69,9 +73,8 @@ git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/lu
 # 拉取插件 luci-app-argon-config
 git_clone https://github.com/jerrykuku/luci-app-argon-config.git package/jerrykuku/luci-app-argon-config
 # 拉取插件 luci-app-mosdns 和其依赖
-git_clone https://github.com/sbwml/luci-app-mosdns package/mosdns
+git_clone https://github.com/sbwml/luci-app-mosdns package/mosdns v5.3.1
 git_clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 ## 拉取插件 luci-app-frpc 和其依赖
 #git_clone https://github.com/kuoruan/openwrt-frp package/kuoruan/openwrt-frp
 #git_clone https://github.com/kuoruan/luci-app-frpc package/kuoruan/luci-app-frpc
-
