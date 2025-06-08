@@ -48,33 +48,28 @@ mkdir -p /tmp/openwrt/log
 
 ##    添加你的自定义包    ##
 
-# 添加软件源 fw876/helloworld
-# git_clone https://github.com/fw876/helloworld.git package/helloworld
 # 添加软件源 sundaqiang/openwrt-packages
 git_clone https://github.com/sundaqiang/openwrt-packages.git package/sundaqiang
-# 添加软件源 vernesong/OpenClash
-git_clone https://github.com/vernesong/OpenClash package/openclash
+# 添加软件源 nikkinikki-org/OpenWrt-nikki
+git_clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/nikki
 
 if [ "$1" == "--local" ]; then
   # 本地拉取依赖
   rm -rf package/sgpublic && mkdir -p package/sgpublic
-  cp -r /mnt/core/home/Document/OpenWrt/openwrt-packages/* package/sgpublic
-  # rm -rf package/little-paimon && mkdir -p package/little-paimon
-  # cp -r /mnt/e/Documents/OpenWrt/packages-little-paimon/* package/little-paimon
+  cp -r /mnt/documents/OpenWrt/openwrt-packages/* package/sgpublic
 else
   # 添加软件源 sgpublic/openwrt-packages
   git_clone https://github.com/sgpublic/openwrt-packages.git package/sgpublic
-  # # 添加软件源 sgpublic/packages-little-paimon
-  # git_clone https://github.com/sgpublic/packages-little-paimon.git package/little-paimon
 fi
 
-# 拉取主题 luci-theme-argon
-git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/luci-theme-argon
+# # 拉取主题 luci-theme-argon
+# git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/luci-theme-argon
 # 拉取插件 luci-app-argon-config
 git_clone https://github.com/jerrykuku/luci-app-argon-config.git package/jerrykuku/luci-app-argon-config
 # 拉取插件 luci-app-mosdns 和其依赖
 git_clone https://github.com/sbwml/luci-app-mosdns package/mosdns
 git_clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
-## 拉取插件 luci-app-frpc 和其依赖
-#git_clone https://github.com/kuoruan/openwrt-frp package/kuoruan/openwrt-frp
-#git_clone https://github.com/kuoruan/luci-app-frpc package/kuoruan/luci-app-frpc
+# 拉取插件 luci-app-multi-frpc
+git_clone https://github.com/justice2001/luci-app-multi-frpc package/justice2001/luci-app-multi-frpc
+# 拉取插件 luci-app-tailscale
+git_clone https://github.com/asvow/luci-app-tailscale.git package/asvow/luci-app-tailscale

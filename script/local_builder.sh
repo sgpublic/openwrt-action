@@ -60,17 +60,17 @@ main() {
     fi
   fi
 
-  if [ -d '/tmp/openwrt' ]; then
+  if [ -d '/var/cache/openwrt' ]; then
     comfirm "Do you want to use build cache? If you select No, it will be deleted. (Y/n)"
     read _need
     if [[ "$_need" =~ ^[nN]$ ]]; then
-      execute "rm -rf /tmp/openwrt/build_dir"
-      execute "rm -rf /tmp/openwrt/staging_dir"
-      execute "rm -rf /tmp/openwrt/binary"
+      execute "rm -rf /var/cache/openwrt/build_dir"
+      execute "rm -rf /var/cache/openwrt/staging_dir"
+      execute "rm -rf /var/cache/openwrt/binary"
     fi
   fi
 
-  execute "mkdir -p /tmp/openwrt"
+  execute "mkdir -p /var/cache/openwrt"
 
   for _element in ${_STEP_STACK[@]}; do
     $_element
@@ -90,13 +90,13 @@ Clone_Source_Code() {
   if [ ! -d 'openwrt.bak' ]; then
     execute "git clone -b $REPO_BRANCH $REPO_URL openwrt.bak --depth=1"
     execute "cd openwrt.bak"
-    execute "mkdir -p /tmp/openwrt/staging_dir"
+    execute "mkdir -p /var/cache/openwrt/staging_dir"
     if [ ! -d "staging_dir" ]; then
-      execute "ln -s /tmp/openwrt/staging_dir ./"
+      execute "ln -s /var/cache/openwrt/staging_dir ./"
     fi
-    execute "mkdir -p /tmp/openwrt/build_dir"
+    execute "mkdir -p /var/cache/openwrt/build_dir"
     if [ ! -d "build_dir" ]; then
-      execute "ln -s /tmp/openwrt/build_dir ./"
+      execute "ln -s /var/cache/openwrt/build_dir ./"
     fi
   else
     execute "cd openwrt.bak"
@@ -150,11 +150,11 @@ Download_Package() {
   execute "cp ./.config $OUTPUT_DIR/"
   runing "make download -j2"
   make download -j$THREAD
-  execute "rm -rf /tmp/openwrt/download/go-mod-cache"
-  runing "find /tmp/openwrt/download -size -1024c -exec ls -l {} \;"
-  find /tmp/openwrt/download -size -1024c -exec ls -l {} \;
-  runing "find /tmp/openwrt/download -size -1024c -exec rm -f {} \;"
-  find /tmp/openwrt/download -size -1024c -exec rm -f {} \;
+  execute "rm -rf /var/cache/openwrt/download/go-mod-cache"
+  runing "find /var/cache/openwrt/download -size -1024c -exec ls -l {} \;"
+  find /var/cache/openwrt/download -size -1024c -exec ls -l {} \;
+  runing "find /var/cache/openwrt/download -size -1024c -exec rm -f {} \;"
+  find /var/cache/openwrt/download -size -1024c -exec rm -f {} \;
 }
 
 Copy_Patch_Files() {
@@ -170,7 +170,7 @@ Copy_Patch_Files() {
 
 Compile_The_Firmware() {
   print_step 'Compile the firmware'
-  execute "rm -rf /tmp/openwrt/binary/targets"
+  execute "rm -rf /var/cache/openwrt/binary/targets"
   runing "make -j$THREAD || make V=s"
   make -j$THREAD || make V=s
 }
@@ -179,14 +179,14 @@ Organize_Files() {
   print_step 'Organize files'
   mkdir -p $OUTPUT_DIR
   execute "rm -rf $OUTPUT_DIR/bin/"
-  execute "rm -rf /tmp/openwrt/binary/targets/*/*/packages"
+  execute "rm -rf /var/cache/openwrt/binary/targets/*/*/packages"
 }
 
 Upload_Firmware_To_Release() {
   print_step 'Upload firmware to release'
   runing "mkdir -p $OUTPUT_DIR/bin"
   mkdir -p $OUTPUT_DIR/bin
-  execute "cp -r /tmp/openwrt/binary/targets/*/*/* $OUTPUT_DIR/bin/"
+  execute "cp -r /var/cache/openwrt/binary/targets/*/*/* $OUTPUT_DIR/bin/"
 }
 
 main

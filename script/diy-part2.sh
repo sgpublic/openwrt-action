@@ -21,16 +21,16 @@ fi
 # 修改默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-nginx/Makefile
-#sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-ssl-nginx/Makefile
-
-# 删除 uhttpd
-sed -i 's/+uhttpd-mod-ubus//g' feeds/luci/collections/luci/Makefile
-sed -i 's/+uhttpd//g' feeds/luci/collections/luci/Makefile
 
 # 更新 GoLang
 rm -r feeds/packages/lang/golang
-if [ -d "/mnt/core/home/Document/OpenWrt/packages/lang/golang" ]; then
-  cp -a /mnt/core/home/Document/OpenWrt/packages/lang/golang feeds/packages/lang
-else
-  svn export https://github.com/openwrt/packages/trunk/lang/golang feeds/packages/lang/golang
-fi
+git_clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang 24.x
+
+# 更新v2ray-geodata
+rm -r feeds/packages/net/v2ray-geodata
+git_clone https://github.com/sbwml/v2ray-geodata feeds/packages/net/v2ray-geodata
+
+# 拉取源 luci-app-zerotier
+rm -r feeds/luci/application/luci-app-zerotier
+git_clone https://github.com/immortalwrt/luci.git ../immortalwrt/luci $IMMORTALWRT_BRANCH
+cp -a ../immortalwrt/luci/application/luci-app-zerotier feeds/luci/application/luci-app-zerotier
