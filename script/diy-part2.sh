@@ -21,16 +21,12 @@ fi
 # 修改默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-nginx/Makefile
-
-# 更新 GoLang
-rm -r feeds/packages/lang/golang
-git_clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang 24.x
-
-# 更新v2ray-geodata
-rm -r feeds/packages/net/v2ray-geodata
-git_clone https://github.com/sbwml/v2ray-geodata feeds/packages/net/v2ray-geodata
-
-# 拉取源 luci-app-zerotier
-rm -r feeds/luci/application/luci-app-zerotier
-git_clone https://github.com/immortalwrt/luci.git ../immortalwrt/luci $IMMORTALWRT_BRANCH
-cp -a ../immortalwrt/luci/application/luci-app-zerotier feeds/luci/application/luci-app-zerotier
+# 使用最新 GoLang
+rm -rf feeds/packages/lang/golang
+cp -a ./custom-feeds/packages/lang/golang feeds/packages/lang/golang
+# 使用 v2ray-geodata
+rm -rf feeds/packages/net/v2ray-geodata
+cp -a ./custom-feeds/packages/net/v2ray-geodata feeds/packages/net/v2ray-geodata
+# 使用 luci-app-zerotier
+rm -rf feeds/luci/applications/luci-app-zerotier
+cp -a ./custom-feeds/luci-immortalwrt/applications/luci-app-zerotier feeds/luci/applications/luci-app-zerotier

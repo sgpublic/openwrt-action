@@ -30,21 +30,24 @@ git_clone() {
 }
 
 # 修改标准目录，若不需要注释掉即可，此代码对 action 编译没有任何影响
-sed -i 's/$(TOPDIR)\/staging_dir/\/tmp\/openwrt\/staging_dir/g' rules.mk
-mkdir -p /tmp/openwrt/staging_dir
-ln -sf /tmp/openwrt/staging_dir staging_dir
+sed -i 's/$(TOPDIR)\/staging_dir/\/var\/cache\/openwrt\/staging_dir/g' rules.mk
+mkdir -p /var/cache/openwrt/staging_dir
+rm -f ./staging_dir
+ln -sf /var/cache/openwrt/staging_dir ./staging_dir
 
-sed -i 's/$(TOPDIR)\/build_dir/\/tmp\/openwrt\/build_dir/g' rules.mk
-mkdir -p /tmp/openwrt/build_dir
-ln -sf /tmp/openwrt/build_dir build_dir
+sed -i 's/$(TOPDIR)\/build_dir/\/var\/cache\/openwrt\/build_dir/g' rules.mk
+mkdir -p /var/cache/openwrt/build_dir
+rm -f ./build_dir
+ln -sf /var/cache/openwrt/build_dir ./build_dir
 
-mkdir -p /tmp/openwrt/binary
-ln -sf /tmp/openwrt/binary bin
+mkdir -p /var/cache/openwrt/binary
+rm -f ./bin
+ln -sf /var/cache/openwrt/binary ./bin
 
-mkdir -p /tmp/openwrt/download
-mkdir -p /tmp/openwrt/mirror
-mkdir -p /tmp/openwrt/ccache
-mkdir -p /tmp/openwrt/log
+mkdir -p /var/cache/openwrt/download
+mkdir -p /var/cache/openwrt/mirror
+mkdir -p /var/cache/openwrt/ccache
+mkdir -p /var/cache/openwrt/log
 
 ##    添加你的自定义包    ##
 
@@ -62,8 +65,17 @@ else
   git_clone https://github.com/sgpublic/openwrt-packages.git package/sgpublic
 fi
 
-# # 拉取主题 luci-theme-argon
-# git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/luci-theme-argon
+
+# 拉取最新 GoLang
+git_clone https://github.com/sbwml/packages_lang_golang ./custom-feeds/packages/lang/golang 24.x
+# 更新v2ray-geodata
+git_clone https://github.com/sbwml/v2ray-geodata ./custom-feeds/packages/net/v2ray-geodata
+# 拉取源 luci-app-zerotier
+git_clone https://github.com/immortalwrt/luci.git ./custom-feeds/luci-immortalwrt $IMMORTALWRT_BRANCH
+
+
+# 拉取主题 luci-theme-argon
+git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/luci-theme-argon
 # 拉取插件 luci-app-argon-config
 git_clone https://github.com/jerrykuku/luci-app-argon-config.git package/jerrykuku/luci-app-argon-config
 # 拉取插件 luci-app-mosdns 和其依赖
@@ -71,5 +83,3 @@ git_clone https://github.com/sbwml/luci-app-mosdns package/mosdns
 git_clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 # 拉取插件 luci-app-multi-frpc
 git_clone https://github.com/justice2001/luci-app-multi-frpc package/justice2001/luci-app-multi-frpc
-# 拉取插件 luci-app-tailscale
-git_clone https://github.com/asvow/luci-app-tailscale.git package/asvow/luci-app-tailscale
