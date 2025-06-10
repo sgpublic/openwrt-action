@@ -2,12 +2,16 @@
 set -e
 
 ##    自定义配置    ##
-CONFIG_FILE="$WORK_ROOT/config/origin.config"
-PATCH_FILES="$WORK_ROOT/patches"
-DIY_P1_SH="$WORK_ROOT/script/diy-part1.sh"
-DIY_P2_SH="$WORK_ROOT/script/diy-part2.sh"
+FLAVOR_DIR="$WORK_ROOT/flavor"
+FLAVOR=""
+FLAVOR_BASE_DIR=""
+PATCH_FILES="patches"
+DIY_P1_SH="diy-part1.sh"
+COMMON_DIY_P1="$WORK_ROOT/script/$DIY_P1_SH"
+DIY_P2_SH="diy-part2.sh"
+COMMON_DIY_P2="$WORK_ROOT/script/$DIY_P2_SH"
 THREAD=$(nproc)
-OUTPUT_DIR="$WORK_ROOT/local"
+OUTPUT_DIR="outputs"
 ##    自定义配置    ##
 
 
@@ -16,6 +20,7 @@ OUTPUT_DIR="$WORK_ROOT/local"
 
 
 declare -a _STEP_STACK=(
+  Select_Build_Flavor
   Clone_Source_Code
   Load_Custom_Feeds
   Update_Feeds
@@ -48,7 +53,7 @@ main() {
   if [[ "$_need" =~ ^[yY]$ ]]; then
     execute "sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc"
     execute "sudo apt update -y"
-    execute "sudo apt install build-essential clang flex bison g++ gawk qemu-utils gcc-multilib g++-multilib gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget subversion -y"
+    execute "sudo apt install build-essential clang flex bison g++ gawk qemu-utils gcc-multilib g++-multilib gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget subversion fzf -y"
     execute "sudo apt clean"
   fi
 
@@ -83,10 +88,25 @@ print_step() {
   echo -e "\e[1;32m  Step $_STEP_CURRENT (${#_STEP_STACK[@]} total): $1\e[0m"
 }
 
+Select_Build_Flavor() {
+  print_step 'Select build flavor'
+  # 选择要使用的风味
+  FLAVOR=$(find $FLAVOR_DIR -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | fzf \
+      --prompt "Select the build flavor you want:")
+  FLAVOR_BASE_DIR=$FLAVOR_DIR/$FLAVOR
+  OUTPUT_DIR=$FLAVOR_BASE_DIR/$OUTPUT_DIR
+  DIY_P1_SH=$FLAVOR_BASE_DIR/$DIY_P1_SH
+  DIY_P2_SH=$FLAVOR_BASE_DIR/$DIY_P2_SH
+  PATCH_FILES=$FLAVOR_BASE_DIR/$PATCH_FILES
+  echo "using $FLAVOR_BASE_DIR"
+  execute "mkdir -p $FLAVOR"
+  execute "cd $FLAVOR"
+}
+
 Clone_Source_Code() {
   print_step 'Clone source code'
   execute "rm -rf openwrt"
-  . $WORK_ROOT/openwrt-detail.sh
+  . $FLAVOR_BASE_DIR/openwrt-detail.sh
   if [ ! -d 'openwrt.bak' ]; then
     execute "git clone -b $REPO_BRANCH $REPO_URL openwrt.bak --depth=1"
     execute "cd openwrt.bak"
@@ -106,7 +126,9 @@ Clone_Source_Code() {
 
 Load_Custom_Feeds() {
   print_step 'Load custom feeds'
+  export COMMON_DIY_P1=$COMMON_DIY_P1
   execute "bash $DIY_P1_SH --local"
+  export -n COMMON_DIY_P1
 }
 
 Update_Feeds() {
@@ -130,9 +152,11 @@ replace_environment_value() {
 Load_Custom_Configuration() {
   print_step 'Load custom configuration'
   # 填充 config 中使用的环境变量
-  replace_environment_value < "$CONFIG_FILE" > "$CONFIG_FILE.replaced"
-  execute "cp $CONFIG_FILE.replaced ./.config"
+  replace_environment_value < "$FLAVOR_BASE_DIR/origin.config" > "$FLAVOR_BASE_DIR/origin.config.replaced"
+  execute "cp $FLAVOR_BASE_DIR/origin.config.replaced ./.config"
+  export COMMON_DIY_P2=$COMMON_DIY_P2
   execute "bash $DIY_P2_SH --local"
+  export -n COMMON_DIY_P2
 }
 
 Download_Package() {
@@ -147,7 +171,7 @@ Download_Package() {
     make defconfig -j$THREAD || make defconfig V=s
   fi
   mkdir -p $OUTPUT_DIR
-  execute "cp ./.config $OUTPUT_DIR/"
+  execute "cp ./.config $OUTPUT_DIR"
   runing "make download -j2"
   make download -j$THREAD
   execute "rm -rf /var/cache/openwrt/download/go-mod-cache"
@@ -178,12 +202,12 @@ Compile_The_Firmware() {
 Organize_Files() {
   print_step 'Organize files'
   mkdir -p $OUTPUT_DIR
-  execute "rm -rf $OUTPUT_DIR/bin/"
   execute "rm -rf /var/cache/openwrt/binary/targets/*/*/packages"
 }
 
 Upload_Firmware_To_Release() {
   print_step 'Upload firmware to release'
+  execute "rm -rf $OUTPUT_DIR/bin/"
   runing "mkdir -p $OUTPUT_DIR/bin"
   mkdir -p $OUTPUT_DIR/bin
   execute "cp -r /var/cache/openwrt/binary/targets/*/*/* $OUTPUT_DIR/bin/"

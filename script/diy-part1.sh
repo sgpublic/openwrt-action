@@ -9,9 +9,6 @@
 # File name: diy-part1.sh
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 set -e
-if [ "$1" == "--local" ]; then
-  set -v
-fi
 
 git_clone() {
   path=`pwd`
@@ -28,6 +25,8 @@ git_clone() {
     git clone $1 --depth=1 $branch $2
   fi
 }
+
+set -v
 
 # 修改标准目录，若不需要注释掉即可，此代码对 action 编译没有任何影响
 sed -i 's/$(TOPDIR)\/staging_dir/\/var\/cache\/openwrt\/staging_dir/g' rules.mk
@@ -48,38 +47,3 @@ mkdir -p /var/cache/openwrt/download
 mkdir -p /var/cache/openwrt/mirror
 mkdir -p /var/cache/openwrt/ccache
 mkdir -p /var/cache/openwrt/log
-
-##    添加你的自定义包    ##
-
-# 添加软件源 sundaqiang/openwrt-packages
-git_clone https://github.com/sundaqiang/openwrt-packages.git package/sundaqiang
-# 添加软件源 nikkinikki-org/OpenWrt-nikki
-git_clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/nikki
-
-if [ "$1" == "--local" ]; then
-  # 本地拉取依赖
-  rm -rf package/sgpublic && mkdir -p package/sgpublic
-  cp -r /mnt/documents/OpenWrt/openwrt-packages/* package/sgpublic
-else
-  # 添加软件源 sgpublic/openwrt-packages
-  git_clone https://github.com/sgpublic/openwrt-packages.git package/sgpublic
-fi
-
-
-# 拉取最新 GoLang
-git_clone https://github.com/sbwml/packages_lang_golang ./custom-feeds/packages/lang/golang 24.x
-# 更新v2ray-geodata
-git_clone https://github.com/sbwml/v2ray-geodata ./custom-feeds/packages/net/v2ray-geodata
-# 拉取源 luci-app-zerotier
-git_clone https://github.com/immortalwrt/luci.git ./custom-feeds/luci-immortalwrt $IMMORTALWRT_BRANCH
-
-
-# 拉取主题 luci-theme-argon
-git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/luci-theme-argon
-# 拉取插件 luci-app-argon-config
-git_clone https://github.com/jerrykuku/luci-app-argon-config.git package/jerrykuku/luci-app-argon-config
-# 拉取插件 luci-app-mosdns 和其依赖
-git_clone https://github.com/sbwml/luci-app-mosdns package/mosdns
-git_clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
-# 拉取插件 luci-app-multi-frpc
-git_clone https://github.com/justice2001/luci-app-multi-frpc package/justice2001/luci-app-multi-frpc

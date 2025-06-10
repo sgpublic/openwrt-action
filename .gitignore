@@ -4,4 +4,6 @@ local/
 venv/
 __pycache__
 
-config/origin.config.replaced
+flavor/**/*.replaced
+flavor/**/full.config
+flavor/**/outputs/
