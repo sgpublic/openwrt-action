@@ -57,14 +57,6 @@ main() {
     execute "sudo apt clean"
   fi
 
-  if [ -d 'openwrt.bak' ]; then
-    comfirm "Do you want to use git cache? If you select No, ite will be deleted. (Y/n)"
-    read _need
-    if [[ "$_need" =~ ^[nN]$ ]]; then
-      execute "rm -rf ./openwrt.bak"
-    fi
-  fi
-
   if [ -d '/var/cache/openwrt' ]; then
     comfirm "Do you want to use build cache? If you select No, it will be deleted. (Y/n)"
     read _need
@@ -107,6 +99,15 @@ Clone_Source_Code() {
   print_step 'Clone source code'
   execute "rm -rf openwrt"
   . $FLAVOR_BASE_DIR/openwrt-detail.sh
+
+  if [ -d 'openwrt.bak' ]; then
+    comfirm "Do you want to use git cache? If you select No, ite will be deleted. (Y/n)"
+    read _need
+    if [[ "$_need" =~ ^[nN]$ ]]; then
+      execute "rm -rf ./openwrt.bak"
+    fi
+  fi
+
   if [ ! -d 'openwrt.bak' ]; then
     execute "git clone -b $REPO_BRANCH $REPO_URL openwrt.bak --depth=1"
     execute "cd openwrt.bak"
@@ -136,10 +137,14 @@ Update_Feeds() {
   execute "./scripts/feeds update -a"
   execute "cp -r ../openwrt.bak ../openwrt"
   execute "cd ../openwrt"
+  export COMMON_DIY_P2=$COMMON_DIY_P2
+  execute "bash $DIY_P2_SH --local"
+  export -n COMMON_DIY_P2
 }
 
 Install_Feeds() {
   print_step 'Install feeds'
+  execute "./scripts/feeds update -i"
   execute "./scripts/feeds install -a"
 }
 
@@ -154,9 +159,6 @@ Load_Custom_Configuration() {
   # 填充 config 中使用的环境变量
   replace_environment_value < "$FLAVOR_BASE_DIR/origin.config" > "$FLAVOR_BASE_DIR/origin.config.replaced"
   execute "cp $FLAVOR_BASE_DIR/origin.config.replaced ./.config"
-  export COMMON_DIY_P2=$COMMON_DIY_P2
-  execute "bash $DIY_P2_SH --local"
-  export -n COMMON_DIY_P2
 }
 
 Download_Package() {
