@@ -25,8 +25,3 @@ rm -rf feeds/packages/net/frp
 # 使用最新 GoLang
 rm -rf feeds/packages/lang/golang
 cp -a ./custom-feeds/packages-sbwml/lang/golang feeds/packages/lang/golang
-# 使用 lede 闭源驱动
-rm -rf package/lede-mt
-mkdir -p package/lede-mt
-cp -a ./custom-feeds/lede/package/lean/mt/drivers/mt7615d package/lede-mt/mt7615d
-cp -a ./custom-feeds/lede/package/lean/mt/drivers/mt_wifi package/lede-mt/mt_wifi
