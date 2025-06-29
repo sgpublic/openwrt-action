@@ -26,8 +26,6 @@ fi
 
 # 拉取最新 GoLang
 git_clone https://github.com/sbwml/packages_lang_golang ./custom-feeds/packages-sbwml/lang/golang 24.x
-# 拉取源 luci-app-zerotier
-git_clone https://github.com/immortalwrt/luci ./custom-feeds/luci-immortalwrt $IMMORTALWRT_BRANCH
 # 拉取源 lede
 git_clone https://github.com/coolsnowwolf/lede ./custom-feeds/lede
 
@@ -36,3 +34,5 @@ git_clone https://github.com/coolsnowwolf/lede ./custom-feeds/lede
 git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/luci-theme-argon
 # 拉取插件 luci-app-argon-config
 git_clone https://github.com/jerrykuku/luci-app-argon-config.git package/jerrykuku/luci-app-argon-config
+# 拉取插件 luci-app-eqosplus
+git_clone https://github.com/sirpdboy/luci-app-eqosplus package/sirpdboy/luci-app-eqosplus

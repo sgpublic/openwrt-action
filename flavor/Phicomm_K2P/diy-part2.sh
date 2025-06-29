@@ -30,6 +30,3 @@ rm -rf package/lede-mt
 mkdir -p package/lede-mt
 cp -a ./custom-feeds/lede/package/lean/mt/drivers/mt7615d package/lede-mt/mt7615d
 cp -a ./custom-feeds/lede/package/lean/mt/drivers/mt_wifi package/lede-mt/mt_wifi
-# 使用 luci-app-zerotier
-rm -rf feeds/luci/applications/luci-app-zerotier
-cp -a ./custom-feeds/luci-immortalwrt/applications/luci-app-zerotier feeds/luci/applications/luci-app-zerotier
