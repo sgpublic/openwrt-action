@@ -19,7 +19,7 @@ git_clone https://github.com/sundaqiang/openwrt-packages.git package/sundaqiang
 # 添加软件源 nikkinikki-org/OpenWrt-nikki
 git_clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/nikki
 
-if [ "$1" == "--local" ]; then
+if [ "$USE_LOCAL_PACKAGES" == "y" ]; then
   # 本地拉取依赖
   rm -rf package/sgpublic && mkdir -p package/sgpublic
   cp -r /mnt/documents/OpenWrt/openwrt-packages/* package/sgpublic

@@ -12,6 +12,8 @@ DIY_P2_SH="diy-part2.sh"
 COMMON_DIY_P2="$WORK_ROOT/script/$DIY_P2_SH"
 THREAD=$(nproc)
 OUTPUT_DIR="outputs"
+
+USE_LOCAL_PACKAGES=${USE_LOCAL_PACKAGES:-y}
 ##    自定义配置    ##
 
 
@@ -128,7 +130,7 @@ Clone_Source_Code() {
 Load_Custom_Feeds() {
   print_step 'Load custom feeds'
   export COMMON_DIY_P1=$COMMON_DIY_P1
-  execute "bash $DIY_P1_SH --local"
+  execute "bash $DIY_P1_SH"
   export -n COMMON_DIY_P1
 }
 
@@ -138,7 +140,7 @@ Update_Feeds() {
   execute "cp -r ../openwrt.bak ../openwrt"
   execute "cd ../openwrt"
   export COMMON_DIY_P2=$COMMON_DIY_P2
-  execute "bash $DIY_P2_SH --local"
+  execute "bash $DIY_P2_SH"
   export -n COMMON_DIY_P2
 }
 

@@ -14,7 +14,7 @@ set -e
 
 ##    添加你的自定义包    ##
 
-if [ "$1" == "--local" ]; then
+if [ "$USE_LOCAL_PACKAGES" == "y" ]; then
   # 本地拉取依赖
   rm -rf package/sgpublic && mkdir -p package/sgpublic
   cp -r /mnt/documents/OpenWrt/openwrt-packages/* package/sgpublic

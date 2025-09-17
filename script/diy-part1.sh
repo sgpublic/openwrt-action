@@ -12,11 +12,15 @@ set -e
 
 git_clone() {
   path=`pwd`
-  if [ -d $2 ]; then
+  echo "clone $1 to $2"
+  if [ -d "$2/.git" ]; then
+    echo "git repo $2 exists, try update"
     cd $2
     git pull
     cd $path
   else
+    echo "git repo $2 not exists or invalid, try clone"
+    rm -rf $2
     mkdir -p "$2"
     branch=
     if [ ! -z "$3" ]; then
