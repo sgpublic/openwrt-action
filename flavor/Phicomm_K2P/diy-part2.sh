@@ -20,8 +20,10 @@ set -e
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-nginx/Makefile
 
-# 删除内置 frp
-rm -rf feeds/packages/net/frp
 # 使用最新 GoLang
 rm -rf feeds/packages/lang/golang
 cp -a ./custom-feeds/packages-sbwml/lang/golang feeds/packages/lang/golang
+
+# 使用 luci-app-zerotier
+rm -rf feeds/luci/applications/luci-app-zerotier
+cp -a ./custom-feeds/luci-immortalwrt/applications/luci-app-zerotier feeds/luci/applications/luci-app-zerotier
