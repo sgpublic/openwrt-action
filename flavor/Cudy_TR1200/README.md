@@ -2,7 +2,7 @@
 
 ## 适用于
 
-+ [Cudy TR1200]https://www.cudy.com/zh-cn/products/tr1200-1-0)
++ [Cudy TR1200](https://www.cudy.com/zh-cn/products/tr1200-1-0)
 
 ## 主题
 

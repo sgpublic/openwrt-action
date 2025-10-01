@@ -17,18 +17,11 @@ set -e
 if [ "$USE_LOCAL_PACKAGES" == "y" ]; then
   # 本地拉取依赖
   rm -rf package/sgpublic && mkdir -p package/sgpublic
-  cp -r /mnt/documents/OpenWrt/openwrt-packages/* package/sgpublic
+  cp -r $WORK_ROOT/../openwrt-packages/* package/sgpublic
 else
   # 添加软件源 sgpublic/openwrt-packages
   git_clone https://github.com/sgpublic/openwrt-packages.git package/sgpublic
 fi
-
-
-# 拉取最新 GoLang
-git_clone https://github.com/sbwml/packages_lang_golang ./custom-feeds/packages-sbwml/lang/golang 24.x
-# 拉取源 immortalwrt-luci
-git_clone https://github.com/immortalwrt/luci ./custom-feeds/luci-immortalwrt $IMMORTALWRT_BRANCH
-
 
 # 拉取主题 luci-theme-argon
 git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/luci-theme-argon

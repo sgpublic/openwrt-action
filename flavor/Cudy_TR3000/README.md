@@ -1,7 +1,5 @@
 # Cudy TR3000
 
-## 适用于
-
 + [Cudy TR3000 256m](https://www.cudy.com/zh-cn/products/tr3000-1-0)
 
 ## 主题

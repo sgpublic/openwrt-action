@@ -13,7 +13,7 @@ COMMON_DIY_P2="$WORK_ROOT/script/$DIY_P2_SH"
 THREAD=$(nproc)
 OUTPUT_DIR="outputs"
 
-USE_LOCAL_PACKAGES=${USE_LOCAL_PACKAGES:-y}
+export USE_LOCAL_PACKAGES=${USE_LOCAL_PACKAGES:-y}
 ##    自定义配置    ##
 
 
@@ -49,6 +49,8 @@ comfirm() {
 }
 
 main() {
+  export PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/c/' | paste -sd:)^C
+
   comfirm "Do you need to initialize your Linux? (y/N)"
   read _need
 

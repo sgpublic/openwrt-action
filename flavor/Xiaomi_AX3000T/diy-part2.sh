@@ -20,14 +20,6 @@ set -e
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-nginx/Makefile
 
-# 删除内置 frp
-rm -rf feeds/packages/net/frp
 # 使用最新 GoLang
 rm -rf feeds/packages/lang/golang
 cp -a ./custom-feeds/packages-sbwml/lang/golang feeds/packages/lang/golang
-# 使用最新 v2ray-geodata
-rm -rf feeds/packages/net/v2ray-geodata
-cp -a ./custom-feeds/packages-sbwml/net/v2ray-geodata feeds/packages/net/v2ray-geodata
-# 使用 luci-app-socat
-rm -rf feeds/luci/applications/luci-app-socat
-cp -a ./custom-feeds/luci-Lienol/luci-app-socat feeds/luci/applications/luci-app-socat

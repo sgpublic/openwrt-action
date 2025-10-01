@@ -22,7 +22,7 @@ git_clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/nikki
 if [ "$USE_LOCAL_PACKAGES" == "y" ]; then
   # 本地拉取依赖
   rm -rf package/sgpublic && mkdir -p package/sgpublic
-  cp -r /mnt/documents/OpenWrt/openwrt-packages/* package/sgpublic
+  cp -r $WORK_ROOT/../openwrt-packages/* package/sgpublic
 else
   # 添加软件源 sgpublic/openwrt-packages
   git_clone https://github.com/sgpublic/openwrt-packages.git package/sgpublic
