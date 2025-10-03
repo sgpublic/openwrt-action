@@ -1,15 +1,17 @@
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY!!
+
 #!/bin/bash
 set -e
 
 ##    自定义配置    ##
-FLAVOR_DIR="$WORK_ROOT/flavor"
+FLAVOR_DIR="/mnt/openwrt-action/flavor"
 FLAVOR=""
 FLAVOR_BASE_DIR=""
 PATCH_FILES="patches"
 DIY_P1_SH="diy-part1.sh"
-COMMON_DIY_P1="$WORK_ROOT/script/$DIY_P1_SH"
+COMMON_DIY_P1="/mnt/openwrt-action/script/$DIY_P1_SH"
 DIY_P2_SH="diy-part2.sh"
-COMMON_DIY_P2="$WORK_ROOT/script/$DIY_P2_SH"
+COMMON_DIY_P2="/mnt/openwrt-action/script/$DIY_P2_SH"
 THREAD=$(nproc)
 OUTPUT_DIR="outputs"
 
@@ -50,16 +52,6 @@ comfirm() {
 
 main() {
   export PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/c/' | paste -sd:)^C
-
-  comfirm "Do you need to initialize your Linux? (y/N)"
-  read _need
-
-  if [[ "$_need" =~ ^[yY]$ ]]; then
-    execute "sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc"
-    execute "sudo apt update -y"
-    execute "sudo apt install build-essential clang flex bison g++ gawk qemu-utils gcc-multilib g++-multilib gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget subversion fzf -y"
-    execute "sudo apt clean"
-  fi
 
   if [ -d '/var/cache/openwrt' ]; then
     comfirm "Do you want to use build cache? If you select No, it will be deleted. (Y/n)"
