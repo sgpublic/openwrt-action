@@ -25,9 +25,9 @@ rm -rf feeds/packages/net/frp
 # 使用最新 GoLang
 rm -rf feeds/packages/lang/golang
 cp -a ./custom-feeds/packages-sbwml/lang/golang feeds/packages/lang/golang
-# 使用最新 v2ray-geodata
-rm -rf feeds/packages/net/v2ray-geodata
-cp -a ./custom-feeds/packages-sbwml/net/v2ray-geodata feeds/packages/net/v2ray-geodata
 # 使用 luci-app-socat
 rm -rf feeds/luci/applications/luci-app-socat
 cp -a ./custom-feeds/luci-Lienol/luci-app-socat feeds/luci/applications/luci-app-socat
+# 使用 luci-app-zerotier
+rm -rf feeds/luci/applications/luci-app-zerotier
+cp -a ./custom-feeds/luci-immortalwrt/applications/luci-app-zerotier feeds/luci/applications/luci-app-zerotier
