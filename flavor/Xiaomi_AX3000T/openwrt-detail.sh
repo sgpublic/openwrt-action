@@ -1,3 +1,3 @@
 REPO_URL=https://github.com/openwrt/openwrt.git
-REPO_BRANCH=v24.10.3
+REPO_BRANCH=v24.10.4
 IMMORTALWRT_BRANCH=openwrt-24.10
