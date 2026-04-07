@@ -14,6 +14,8 @@ set -e
 
 ##    添加你的自定义包    ##
 
+# 拉取最新 GoLang
+git_clone https://github.com/sbwml/packages_lang_golang ./custom-feeds/packages-sbwml/lang/golang 25.x
 # 添加软件源 sundaqiang/openwrt-packages
 git_clone https://github.com/sundaqiang/openwrt-packages.git package/sundaqiang
 # 添加软件源 vernesong/OpenClash
