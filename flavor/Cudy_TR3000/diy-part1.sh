@@ -16,8 +16,10 @@ set -e
 
 # 添加软件源 sundaqiang/openwrt-packages
 git_clone https://github.com/sundaqiang/openwrt-packages.git package/sundaqiang
-# 添加软件源 nikkinikki-org/OpenWrt-nikki
-git_clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/nikki
+## 添加软件源 nikkinikki-org/OpenWrt-nikki
+#git_clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/nikki
+# 添加软件源 vernesong/OpenClash
+git_clone https://github.com/vernesong/OpenClash.git package/OpenClash
 
 if [ "$USE_LOCAL_PACKAGES" == "y" ]; then
   # 本地拉取依赖
@@ -33,9 +35,6 @@ fi
 git_clone https://github.com/sbwml/packages_lang_golang ./custom-feeds/packages-sbwml/lang/golang 24.x
 # 拉取源 EasyTier
 git_clone https://github.com/EasyTier/luci-app-easytier.git package/EasyTier
-# 拉取源 immortalwrt-luci
-git_clone https://github.com/immortalwrt/luci ./custom-feeds/luci-immortalwrt $IMMORTALWRT_BRANCH
-
 
 # 拉取主题 luci-theme-argon
 git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/luci-theme-argon

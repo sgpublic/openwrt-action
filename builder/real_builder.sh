@@ -172,11 +172,11 @@ Download_Package() {
   execute "cp ./.config $OUTPUT_DIR"
   runing "make download -j2"
   make download -j$THREAD
-  execute "rm -rf /var/cache/openwrt/download/go-mod-cache"
-  runing "find /var/cache/openwrt/download -size -1024c -exec ls -l {} \;"
-  find /var/cache/openwrt/download -size -1024c -exec ls -l {} \;
-  runing "find /var/cache/openwrt/download -size -1024c -exec rm -f {} \;"
-  find /var/cache/openwrt/download -size -1024c -exec rm -f {} \;
+#  execute "rm -rf /var/cache/openwrt/download/go-mod-cache"
+#  runing "find /var/cache/openwrt/download -size -1024c -exec ls -l {} \;"
+#  find /var/cache/openwrt/download -size -1024c -exec ls -l {} \;
+#  runing "find /var/cache/openwrt/download -size -1024c -exec rm -f {} \;"
+#  find /var/cache/openwrt/download -size -1024c -exec rm -f {} \;
 }
 
 Copy_Patch_Files() {

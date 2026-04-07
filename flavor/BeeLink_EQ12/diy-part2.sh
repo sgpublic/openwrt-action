@@ -22,12 +22,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-n
 
 # 删除内置 frp
 rm -rf feeds/packages/net/frp
-# 使用最新 GoLang
-rm -rf feeds/packages/lang/golang
-cp -a ./custom-feeds/packages-sbwml/lang/golang feeds/packages/lang/golang
-# 使用 luci-app-socat
-rm -rf feeds/luci/applications/luci-app-socat
-cp -a ./custom-feeds/luci-Lienol/luci-app-socat feeds/luci/applications/luci-app-socat
-# 使用 luci-app-zerotier
-rm -rf feeds/luci/applications/luci-app-zerotier
-cp -a ./custom-feeds/luci-immortalwrt/applications/luci-app-zerotier feeds/luci/applications/luci-app-zerotier
+# TODO: 等待 https://github.com/openwrt/packages/commit/47cadedca2bfd9f42e8110d6c6674644a1ded6dd 发版
+# 使用最新 rust
+rm -rf feeds/packages/lang/rust
+cp -a ./custom-feeds/openwrt-packages/lang/rust feeds/packages/lang/rust

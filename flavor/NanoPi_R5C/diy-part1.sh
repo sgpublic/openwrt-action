@@ -27,7 +27,7 @@ fi
 # 拉取最新 GoLang
 git_clone https://github.com/sbwml/packages_lang_golang ./custom-feeds/packages-sbwml/lang/golang 24.x
 # 拉取源 luci-app-zerotier
-git_clone https://github.com/immortalwrt/luci ./custom-feeds/luci-immortalwrt $IMMORTALWRT_BRANCH
+git_clone https://github.com/immortalwrt/luci ./custom-feeds/luci-immortalwrt $IMMORTALWRT_LUCI_BRANCH
 # 拉取源 lede
 git_clone https://github.com/coolsnowwolf/lede ./custom-feeds/lede
 
