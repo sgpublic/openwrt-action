@@ -1,8 +1,6 @@
-# 零刻 EQ12
+# Tenda BE12 Pro
 
-## 适用于
-
-+ x86_64 on i225-V
++ [Tenda BE12 Pro](https://www.tenda.com.cn/product/BE12Pro)
 
 ## 主题
 
@@ -12,6 +10,6 @@
 
 ## 管理页
 
-默认地址：`192.168.6.1`
+默认地址：`192.168.7.1`
 
 默认密码：（无密码）
