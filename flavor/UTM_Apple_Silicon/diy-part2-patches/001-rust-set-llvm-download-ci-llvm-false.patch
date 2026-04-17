@@ -11,12 +11,12 @@ Fixes #27331.
 Signed-off-by: Orne Brocaar <info@brocaar.com>
 (cherry picked from commit 4c3a649dd78b76a14b55799d5ee871eb060c08e1)
 ---
- lang/rust/Makefile | 4 ++--
+ feeds/packages/lang/rust/Makefile | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/lang/rust/Makefile b/lang/rust/Makefile
---- a/lang/rust/Makefile
-+++ b/lang/rust/Makefile
+diff --git a/feeds/packages/lang/rust/Makefile b/feeds/packages/lang/rust/Makefile
+--- a/feeds/packages/lang/rust/Makefile
++++ b/feeds/packages/lang/rust/Makefile
 @@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
  PKG_NAME:=rust
