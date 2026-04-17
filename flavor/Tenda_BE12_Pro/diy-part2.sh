@@ -22,3 +22,10 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-n
 
 # 删除内置 frp
 rm -rf feeds/packages/net/frp
+
+# 使用最新 GoLang
+rm -rf feeds/packages/lang/golang
+cp -a ./custom-feeds/packages-sbwml/lang/golang feeds/packages/lang/golang
+# 更新 target
+rm -rf target/linux/mediatek
+cp -a ./custom-feeds/openwrt/target/linux/mediatek target/linux/mediatek

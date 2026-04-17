@@ -11,6 +11,7 @@ PATCH_FILES="patches"
 DIY_P1_SH="diy-part1.sh"
 COMMON_DIY_P1="/mnt/openwrt-action/script/$DIY_P1_SH"
 DIY_P2_SH="diy-part2.sh"
+DIY_P2_PATCHES="diy-part2-patches"
 COMMON_DIY_P2="/mnt/openwrt-action/script/$DIY_P2_SH"
 THREAD=$(nproc)
 OUTPUT_DIR="outputs"
@@ -28,6 +29,7 @@ declare -a _STEP_STACK=(
   Clone_Source_Code
   Load_Custom_Feeds
   Update_Feeds
+  Apply_Patches
   Install_Feeds
   Load_Custom_Configuration
   Download_Package
@@ -86,6 +88,7 @@ Select_Build_Flavor() {
   DIY_P1_SH=$FLAVOR_BASE_DIR/$DIY_P1_SH
   DIY_P2_SH=$FLAVOR_BASE_DIR/$DIY_P2_SH
   PATCH_FILES=$FLAVOR_BASE_DIR/$PATCH_FILES
+  DIY_P2_PATCHES=$FLAVOR_BASE_DIR/$DIY_P2_PATCHES
   echo "using $FLAVOR_BASE_DIR"
   execute "mkdir -p $FLAVOR"
   execute "cd $FLAVOR"
@@ -138,6 +141,28 @@ Update_Feeds() {
   export -n COMMON_DIY_P2
 }
 
+Apply_Patches() {
+  print_step 'Apply patches'
+  shopt -s nullglob
+
+  local patches=("$DIY_P2_PATCHES"/*.patch "$DIY_P2_PATCHES"/*.diff)
+
+  if [ ! -d "$DIY_P2_PATCHES" ]; then
+    echo "Patch directory not found, skip: $DIY_P2_PATCHES"
+    return 0
+  fi
+
+  if [ ${#patches[@]} -eq 0 ]; then
+    echo "No diy part2 patches, skip."
+    return 0
+  fi
+
+  for patch_file in "${patches[@]}"; do
+    runing "patch -p1 < $(basename "$patch_file")"
+    patch -p1 < "$patch_file"
+  done
+}
+
 Install_Feeds() {
   print_step 'Install feeds'
   execute "./scripts/feeds update -i"
@@ -172,11 +197,6 @@ Download_Package() {
   execute "cp ./.config $OUTPUT_DIR"
   runing "make download -j2"
   make download -j$THREAD
-#  execute "rm -rf /var/cache/openwrt/download/go-mod-cache"
-#  runing "find /var/cache/openwrt/download -size -1024c -exec ls -l {} \;"
-#  find /var/cache/openwrt/download -size -1024c -exec ls -l {} \;
-#  runing "find /var/cache/openwrt/download -size -1024c -exec rm -f {} \;"
-#  find /var/cache/openwrt/download -size -1024c -exec rm -f {} \;
 }
 
 Copy_Patch_Files() {
