@@ -2,6 +2,8 @@
 
 #!/bin/bash
 set -e
+# https://github.com/openwrt/openwrt/issues/9545
+umask 022
 
 ##    自定义配置    ##
 FLAVOR_DIR="/mnt/openwrt-action/flavor"

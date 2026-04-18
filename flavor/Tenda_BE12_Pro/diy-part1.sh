@@ -14,8 +14,6 @@ set -e
 
 ##    添加你的自定义包    ##
 
-# 拉取最新 GoLang
-git_clone https://github.com/sbwml/packages_lang_golang ./custom-feeds/packages-sbwml/lang/golang 25.x
 # 添加软件源 sundaqiang/openwrt-packages
 git_clone https://github.com/sundaqiang/openwrt-packages.git package/sundaqiang
 # 添加软件源 vernesong/OpenClash
@@ -32,8 +30,6 @@ fi
 
 # 拉取源 EasyTier
 git_clone https://github.com/EasyTier/luci-app-easytier.git package/EasyTier
-# 拉取源最新 OpenWrt
-git_clone https://github.com/openwrt/openwrt ./custom-feeds/openwrt $OPENWRT_REPO_BRANCH
 
 # 拉取主题 luci-theme-argon
 git_clone https://github.com/jerrykuku/luci-theme-argon.git package/jerrykuku/luci-theme-argon

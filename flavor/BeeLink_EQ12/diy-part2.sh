@@ -20,8 +20,5 @@ set -e
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-nginx/Makefile
 
-# 使用最新 GoLang
-rm -rf feeds/packages/lang/golang
-cp -a ./custom-feeds/packages-sbwml/lang/golang feeds/packages/lang/golang
 # 删除内置 frp
 rm -rf feeds/packages/net/frp
