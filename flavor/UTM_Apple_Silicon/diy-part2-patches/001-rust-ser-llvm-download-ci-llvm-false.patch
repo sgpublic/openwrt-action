@@ -1,0 +1,39 @@
+From 47cadedca2bfd9f42e8110d6c6674644a1ded6dd Mon Sep 17 00:00:00 2001
+From: Orne Brocaar <info@brocaar.com>
+Date: Thu, 2 Apr 2026 01:37:40 +0000
+Subject: [PATCH] rust: set llvm.download-ci-llvm=false
+
+These LLVM builds get deleted after a certain time, causing Rust builds
+to break as the LLVM build can no longer be downloaded.
+
+Fixes #27331.
+
+Signed-off-by: Orne Brocaar <info@brocaar.com>
+(cherry picked from commit 4c3a649dd78b76a14b55799d5ee871eb060c08e1)
+---
+ feeds/packages/lang/rust/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/feeds/packages/lang/rust/Makefile b/feeds/packages/lang/rust/Makefile
+--- a/feeds/packages/lang/rust/Makefile
++++ b/feeds/packages/lang/rust/Makefile
+@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
+
+ PKG_NAME:=rust
+ PKG_VERSION:=1.90.0
+-PKG_RELEASE:=1
++PKG_RELEASE:=2
+
+ PKG_SOURCE:=rustc-$(PKG_VERSION)-src.tar.xz
+ PKG_SOURCE_URL:=https://static.rust-lang.org/dist/
+@@ -75,7 +75,7 @@ HOST_CONFIGURE_ARGS = \
+ 	--release-channel=stable \
+ 	--enable-cargo-native-static \
+ 	--bootstrap-cache-path=$(DL_DIR)/rustc \
+-	--set=llvm.download-ci-llvm=true \
++	--set=llvm.download-ci-llvm=false \
+ 	$(TARGET_CONFIGURE_ARGS)
+
+ define Host/Uninstall
+--
+2.43.0
